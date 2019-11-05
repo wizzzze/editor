@@ -1,44 +1,51 @@
 <template>
-  <div id="app">
-    <toolBar />
-    <leftBar />
-    <container />
-    <progressBar :amount="50"/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="#263238"
+      height="46"
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="20"
+        />
+      </div>
+      <barMenu v-for="(item, i) in menus" 
+        :key="i"
+        :title="item.title"
+        :items="item.items"
+      />
+
+      <v-spacer></v-spacer>
+
+    </v-app-bar>
+
+    <v-content>
+      <container />
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import toolBar from './components/toolBar'
-import leftBar from './components/leftBar'
-import container from './components/container'
-import progressBar from './components/progress'
+import barMenu from './components/barMenu';
+import container from './components/container';
+import menuConf from './configs/menuConf';
 
 export default {
   name: 'App',
   components: {
-    toolBar,
-    leftBar,
-    container,
-    progressBar
-  }
-}
-</script>
+    barMenu,
+    container
+  },
 
-<style>
-body{
-  margin:0;
-  padding:0;
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  bottom:0;
-}
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>
+  data: () => ({
+    //
+    menus : menuConf
+  }),
+};
+</script>
